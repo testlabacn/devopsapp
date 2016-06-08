@@ -1,0 +1,34 @@
+
+<div>
+    <h2><span>Waste Collection</span> {{vm.wasteCollection.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Server Timestamp</span></dt>
+        <dd>
+            <span>{{vm.wasteCollection.serverTimestamp | date:'medium'}}</span>
+        </dd>
+        <dt><span>Truck Timestamp</span></dt>
+        <dd>
+            <span>{{vm.wasteCollection.truckTimestamp | date:'medium'}}</span>
+        </dd>
+        <dt><span>Waste Level</span></dt>
+        <dd>
+            <span translate="{{'devopsApp.WasteLevel.' + vm.wasteCollection.wasteLevel}}">{{vm.wasteCollection.wasteLevel}}</span>
+        </dd>
+        <dt><span>Truck Code</span></dt>
+        <dd>
+            <a ui-sref="truck-detail({id:vm.wasteCollection.truckCode.id})">{{vm.wasteCollection.truckCode.id}}</a>
+        </dd>
+        <dt><span>Trash Bin Code</span></dt>
+        <dd>
+            <a ui-sref="trash-bin-detail({id:vm.wasteCollection.trashBinCode.id})">{{vm.wasteCollection.trashBinCode.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

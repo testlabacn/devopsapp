@@ -1,0 +1,35 @@
+
+<div>
+    <h2><span>Trash Bin</span> {{vm.trashBin.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Trash Bin Code</span></dt>
+        <dd>
+            <span>{{vm.trashBin.trashBinCode}}</span>
+        </dd>
+        <dt><span>Latitute</span></dt>
+        <dd>
+            <span>{{vm.trashBin.latitute}}</span>
+        </dd>
+        <dt><span>Longitude</span></dt>
+        <dd>
+            <span>{{vm.trashBin.longitude}}</span>
+        </dd>
+        <dt><span>Bar Code</span></dt>
+        <dd>
+            <div ng-if="vm.trashBin.barCode">
+                <a ng-click="vm.openFile(vm.trashBin.barCodeContentType, vm.trashBin.barCode)">
+                    <img data-ng-src="{{'data:' + vm.trashBin.barCodeContentType + ';base64,' + vm.trashBin.barCode}}" style="max-width: 100%;"/>
+                </a>
+                {{vm.trashBin.barCodeContentType}}, {{vm.byteSize(vm.trashBin.barCode)}}
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

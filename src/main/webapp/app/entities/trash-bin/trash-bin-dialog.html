@@ -1,0 +1,98 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myTrashBinLabel">Create or edit a Trash Bin</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.trashBin.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.trashBin.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_trashBinCode">Trash Bin Code</label>
+            <input type="text" class="form-control" name="trashBinCode" id="field_trashBinCode"
+                    ng-model="vm.trashBin.trashBinCode"
+                    required />
+            <div ng-show="editForm.trashBinCode.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.trashBinCode.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_latitute">Latitute</label>
+            <input type="number" class="form-control" name="latitute" id="field_latitute"
+                    ng-model="vm.trashBin.latitute"
+                    required />
+            <div ng-show="editForm.latitute.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.latitute.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.latitute.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_longitude">Longitude</label>
+            <input type="number" class="form-control" name="longitude" id="field_longitude"
+                    ng-model="vm.trashBin.longitude"
+                    required />
+            <div ng-show="editForm.longitude.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.longitude.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.longitude.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group" ngf-drop ngf-change="vm.setBarCode($file, vm.trashBin)" ngf-pattern="'image/*'">
+            <label class="control-label" for="field_barCode">Bar Code</label>
+            <div>
+                <img data-ng-src="{{'data:' + vm.trashBin.barCodeContentType + ';base64,' + vm.trashBin.barCode}}" style="max-height: 100px;" ng-if="vm.trashBin.barCode"/>
+                <div ng-if="vm.trashBin.barCode" class="help-block clearfix">
+                    <span class="pull-left">{{vm.trashBin.barCodeContentType}}, {{vm.byteSize(vm.trashBin.barCode)}}</span>
+                    <button ng-click="vm.trashBin.barCode=null;vm.trashBin.barCodeContentType=null;"
+                            class="btn btn-default btn-xs pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+                <button type="file" ngf-select class="btn btn-default btn-block"
+                        ngf-change="vm.setBarCode($file, vm.trashBin)" accept="image/*">
+                    Add image
+                </button>
+            </div>
+            <input type="hidden" class="form-control" name="barCode" id="field_barCode"
+                    ng-model="vm.trashBin.barCode"
+                    required />
+            <input type="hidden" class="form-control" name="barCodeContentType" id="field_barCodeContentType"
+                    ng-model="vm.trashBin.barCodeContentType" />
+            <div ng-show="editForm.barCode.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.barCode.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>
